@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Domain.Classes.AppDBClasses;
+﻿using Domain.Classes.AppDBClasses;
 
 namespace App.Common.Interfaces.Persistence
 {
@@ -7,6 +6,8 @@ namespace App.Common.Interfaces.Persistence
     {
         void Add(Employee employee);
         void Update(Employee employee);
+        Task<Employee> FindByLogin(string login);
+        Task<Employee> GetUserCheckToken(string token);
         Task<bool> ContainsLogin(string login);
     }
 }

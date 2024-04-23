@@ -1,4 +1,7 @@
-﻿using App.Auth.Commands.RegisterEmployee;
+﻿using App.Auth.Commands.RefreshToken;
+using App.Auth.Commands.RegisterEmployee;
+using App.Auth.Commands.RevokeToken;
+using App.Auth.Queries.Login;
 using Domain.Models.User;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -6,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace server.Controllers
 {
-    [AllowAnonymous]
     [Route("api/auth")]
     public class AuthController : ApiController
     {
@@ -17,6 +19,25 @@ namespace server.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            var query = new LoginQuery
+            {
+                Login = request.Login,
+                Password = request.Password,
+            };
+
+            var result = await _mediator.Send(query);
+
+            if (result.Success)
+                SetRefreshTokenInCookie(result.RefreshToken!);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "admin")]
         [HttpPost("registerEmployee")]
         public async Task<IActionResult> RegisterEmployee([FromBody] RegisterEmployeeRequest request)
         {
@@ -36,6 +57,41 @@ namespace server.Controllers
 
             if (result.Success)
                 SetRefreshTokenInCookie(result.RefreshToken!);
+
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("refreshToken")]
+        public async Task<IActionResult> RefreshToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+
+            var query = new RefreshTokenCommand
+            {
+                Token = refreshToken
+            };
+
+            var result = await _mediator.Send(query);
+
+            if (!string.IsNullOrEmpty(result.RefreshToken))
+                SetRefreshTokenInCookie(result.RefreshToken);
+
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("revokeToken")]
+        public async Task<IActionResult> RevokeToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+
+            var query = new RevokeTokenCommand
+            {
+                Token = refreshToken
+            };
+
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
@@ -68,5 +124,11 @@ namespace server.Controllers
         public string Gender { get; set; }
 
         public string? Token { get; set; } //Токен из ссылки для регистрации
+    }
+
+    public class LoginRequest
+    {
+        public string Login { get; set; }
+        public string Password { get; set; }
     }
 }

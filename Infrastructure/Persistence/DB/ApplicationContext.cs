@@ -45,10 +45,10 @@ namespace Infrastructure.Persistence.DB
             //Настройка отношений PK-PK между AdultPatient и Passport
             modelBuilder.Entity<Passport>()
                 .HasOne(p => p.AdultPatient)
-                .WithOne()
-                .HasForeignKey<Passport>(e => e.AdultPatientId)
+                .WithOne(a => a.Passport)
+                .HasForeignKey<Passport>(p => p.AdultPatientId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             //Настройка отношений один-ко-многим между AdultPatient и Address
             modelBuilder.Entity<AdultPatient>()
@@ -85,10 +85,10 @@ namespace Infrastructure.Persistence.DB
             //Настройка отношений PK-PK между LittlePatient и BirthCertificate
             modelBuilder.Entity<BirthCertificate>()
                 .HasOne(p => p.LittlePatient)
-                .WithOne()
-                .HasForeignKey<BirthCertificate>(e => e.LittlePatientId)
+                .WithOne(a => a.BirthCertificate)
+                .HasForeignKey<BirthCertificate>(p => p.LittlePatientId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             //Настройка отношений один-ко-многим между LittlePatient и Address
             modelBuilder.Entity<LittlePatient>()
