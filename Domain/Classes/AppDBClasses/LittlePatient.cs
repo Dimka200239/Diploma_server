@@ -13,6 +13,7 @@ namespace Domain.Classes.AppDBClasses
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public BirthCertificate BirthCertificate { get; set; }
+        public LittlePatientAdultPatientMap LittlePatientAdultPatientMap { get; set; }
         public ICollection<Address> Addresses { get; set; }
         public string Gender { get; set; }
         public ICollection<AnthropometryOfPatient> AnthropometryOfPatients { get; set; }
@@ -21,5 +22,7 @@ namespace Domain.Classes.AppDBClasses
 
         [Required]
         public string Role { get; set; } //Роль пользователя
+
+        public string GetFullName => Name + " " + LastName + " " + MiddleName + " ";
     }
 }

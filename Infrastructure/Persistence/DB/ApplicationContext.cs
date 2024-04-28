@@ -23,6 +23,7 @@ namespace Infrastructure.Persistence.DB
         public DbSet<LittlePatient> LittlePatients { get; set; }
         public DbSet<Passport> Passports { get; set; }
         public DbSet<RefreshToken> RefreshTokens { set; get; }
+        public DbSet<LittlePatientAdultPatientMap> LittlePatientAdultPatientMaps { set; get; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -121,6 +122,26 @@ namespace Infrastructure.Persistence.DB
                 .HasForeignKey(r => r.PatientId)
                 .HasPrincipalKey(p => p.Id)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            //Настройка отношений PK-PK между AdultPatient и LittlePatientAdultPatientMap
+            modelBuilder.Entity<LittlePatientAdultPatientMap>()
+                .HasOne(p => p.AdultPatient)
+                .WithOne(a => a.LittlePatientAdultPatientMap)
+                .HasForeignKey<LittlePatientAdultPatientMap>(p => p.AdultPatientId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            //Настройка отношений PK-PK между LittlePatient и LittlePatientAdultPatientMap
+            modelBuilder.Entity<LittlePatientAdultPatientMap>()
+                .HasOne(p => p.LittlePatient)
+                .WithOne(a => a.LittlePatientAdultPatientMap)
+                .HasForeignKey<LittlePatientAdultPatientMap>(p => p.LittlePatientId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            //Настройка составного первичного ключа для LittlePatientAdultPatientMap
+            modelBuilder.Entity<LittlePatientAdultPatientMap>()
+                .HasKey(map => new { map.AdultPatientId, map.LittlePatientId });
         }
     }
 }
