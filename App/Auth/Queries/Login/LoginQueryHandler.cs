@@ -41,7 +41,8 @@ namespace App.Auth.Queries.Login
                     Token = _jwtTokenGenerator.GenerateToken(employee),
                     Role = employee.Role,
                     RefreshToken = refreshToken.Token,
-                    RefreshTokenExpiration = refreshToken.Expires
+                    RefreshTokenExpiration = refreshToken.Expires,
+                    Login = employee.Login
                 };
             }
             else

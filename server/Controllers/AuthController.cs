@@ -1,6 +1,7 @@
 ﻿using App.Auth.Commands.RefreshToken;
 using App.Auth.Commands.RegisterEmployee;
 using App.Auth.Commands.RevokeToken;
+using App.Auth.Queries.GetEmployeeByLogin;
 using App.Auth.Queries.Login;
 using Domain.Models.User;
 using MediatR;
@@ -89,6 +90,20 @@ namespace server.Controllers
             var query = new RevokeTokenCommand
             {
                 Token = refreshToken
+            };
+
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "employee, admin")]
+        [HttpGet("getEmployeeByLogin/{login}")]
+        public async Task<IActionResult> GetEmployeeByLogin(string login)
+        {
+            var query = new GetEmployeeByLoginQuery
+            {
+                Login = login
             };
 
             var result = await _mediator.Send(query);
