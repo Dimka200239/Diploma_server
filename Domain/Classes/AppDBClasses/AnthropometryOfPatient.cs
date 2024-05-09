@@ -10,15 +10,14 @@ namespace Domain.Classes.AppDBClasses
         public int Id { get; set; }
         public int PatientId { get; set; }
         public string Role { get; set; } //Роль пользователя
-        public int Height { get; set; } //Рост
-        public int Weight { get; set; } //Вес
+        public double Height { get; set; } //Рост
+        public double Weight { get; set; } //Вес
         public int Age { get; set; } //Возраст
+        public double Waist { get; set; } //Объем талии
+        public double Hip { get; set; } //Объем бедра
         public DateTime DateOfChange { get; set; }
 
         [ForeignKey("PatientId")]
         public AdultPatient AdultPatient { get; set; }
-
-        [ForeignKey("PatientId")]
-        public LittlePatient LittlePatient { get; set; }
     }
 }

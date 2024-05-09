@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace server.Controllers
 {
-    [Authorize(Roles = "employee")]
     [Route("api/passport")]
     public class PassportController : ApiController
     {
@@ -17,6 +16,7 @@ namespace server.Controllers
             _mediator = mediator;
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpPost("createPassport")]
         public async Task<IActionResult> CreatePassport([FromBody] CreatePassportRequest request)
         {
@@ -34,6 +34,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpGet("getPassport/{adultPatientId}")]
         public async Task<IActionResult> GetPassport(int adultPatientId)
         {

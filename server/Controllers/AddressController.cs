@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace server.Controllers
 {
-    [Authorize(Roles = "employee")]
-    [Route("api/adress")]
+    [Route("api/address")]
     public class AddressController : ApiController
     {
         private readonly ISender _mediator;
@@ -17,6 +16,7 @@ namespace server.Controllers
             _mediator = mediator;
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpPost("createAddress")]
         public async Task<IActionResult> CreateAddress([FromBody] CreateAddressRequest request)
         {
@@ -35,6 +35,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpGet("getAllAddresses/{patientId}/{role}")]
         public async Task<IActionResult>GetAllAddresses(int patientId, string role)
         {

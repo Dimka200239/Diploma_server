@@ -14,9 +14,6 @@ namespace Infrastructure.Persistence.DB.Repositories
         private IAnthropometryOfPatientRepository _anthropometryOfPatientRepository;
         private ILifestyleRepository _lifestyleRepository;
         private IBloodAnalysisRepository _bloodAnalysisRepository;
-        private IBirthCertificateRepository _birthCertificateRepository;
-        private ILittlePatientRepository _littlePatientRepository;
-        private ILittlePatientAdultPatientMapReposirory _littlePatientAdultPatientMapReposirory;
 
         public UnitOfWork(ApplicationContext context)
         {
@@ -31,9 +28,6 @@ namespace Infrastructure.Persistence.DB.Repositories
         public IAnthropometryOfPatientRepository AnthropometryOfPatients => _anthropometryOfPatientRepository ?? (_anthropometryOfPatientRepository = new AnthropometryOfPatientRepository(_context));
         public ILifestyleRepository Lifestyles => _lifestyleRepository ?? (_lifestyleRepository = new LifestyleRepository(_context));
         public IBloodAnalysisRepository BloodAnalysises => _bloodAnalysisRepository ?? (_bloodAnalysisRepository = new BloodAnalysisRepository(_context));
-        public IBirthCertificateRepository BirthCertificates => _birthCertificateRepository ?? (_birthCertificateRepository = new BirthCertificateRepository(_context));
-        public ILittlePatientRepository LittlePatients => _littlePatientRepository ?? (_littlePatientRepository = new LittlePatientRepository(_context));
-        public ILittlePatientAdultPatientMapReposirory LittlePatientAdultPatientMaps => _littlePatientAdultPatientMapReposirory ?? (_littlePatientAdultPatientMapReposirory = new LittlePatientAdultPatientMapReposirory(_context));
 
         public async Task<bool> CompleteAsync()
         {

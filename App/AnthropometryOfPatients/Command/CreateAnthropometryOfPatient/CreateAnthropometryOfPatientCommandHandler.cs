@@ -26,6 +26,8 @@ namespace App.AnthropometryOfPatients.Command.CreateAnthropometryOfPatient
                 Height = request.Height,
                 Weight = request.Weight,
                 Age = request.Age,
+                Waist = request.Waist,
+                Hip = request.Hip,
                 DateOfChange = DateTime.UtcNow
             };
 

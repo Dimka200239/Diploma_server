@@ -10,9 +10,6 @@
         IAnthropometryOfPatientRepository AnthropometryOfPatients { get; }
         ILifestyleRepository Lifestyles { get; }
         IBloodAnalysisRepository BloodAnalysises { get; }
-        IBirthCertificateRepository BirthCertificates { get; }
-        ILittlePatientRepository LittlePatients { get; }
-        ILittlePatientAdultPatientMapReposirory LittlePatientAdultPatientMaps{ get; }
         Task<bool> CompleteAsync();
     }
 }

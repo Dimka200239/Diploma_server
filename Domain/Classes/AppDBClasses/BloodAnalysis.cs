@@ -17,6 +17,7 @@ namespace Domain.Classes.AppDBClasses
         public double VLDL { get; set; } //Кол-во ЛПОНП в крови
         public double AtherogenicityCoefficient { get; set; } //Коэффицент атерогенности
         public double BMI { get; set; } //Индекс массы тела
+        public double WHI { get; set; } //Индекс талии/бедра
         public DateTime DateOfChange { get; set; }
         public int EmployeeId { set; get; }
 
@@ -25,8 +26,5 @@ namespace Domain.Classes.AppDBClasses
 
         [ForeignKey("PatientId")]
         public AdultPatient AdultPatient { get; set; }
-
-        [ForeignKey("PatientId")]
-        public LittlePatient LittlePatient { get; set; }
     }
 }

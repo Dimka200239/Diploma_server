@@ -42,15 +42,6 @@ namespace server.Authentication
             }
         }
 
-        public bool IsLittlePatient
-        {
-            get
-            {
-                var result = User?.IsInRole(Role.LittlePatient) ?? false;
-                return result;
-            }
-        }
-
         public bool IsAdmin
         {
             get
@@ -60,7 +51,7 @@ namespace server.Authentication
             }
         }
 
-        public bool IsAnonimus => !(IsEmployee || IsAdultPatient || IsLittlePatient || IsAdmin);
+        public bool IsAnonimus => !(IsEmployee || IsAdultPatient || IsAdmin);
 
         private ClaimsPrincipal? User => _httpContextAccessor.HttpContext?.User;
     }

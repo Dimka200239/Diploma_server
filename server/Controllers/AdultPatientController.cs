@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace server.Controllers
 {
-    [Authorize(Roles = "employee")]
     [Route("api/adultPatient")]
     public class AdultPatientController : ApiController
     {
@@ -21,6 +20,7 @@ namespace server.Controllers
             _mediator = mediator;
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpPost("getAdultPatientByPassport")]
         public async Task<IActionResult> GetAdultPatientByPassport([FromBody] GetAdultPatientByPassportRequest request)
         {
@@ -37,6 +37,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpPost("getAdultPatientByName")]
         public async Task<IActionResult> GetAdultPatientByName([FromBody] GetAdultPatientByNameRequest request)
         {
@@ -52,6 +53,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpPost("createAdultPatient")]
         public async Task<IActionResult> CreateAdultPatient([FromBody] CreateAdultPatientRequest request)
         {
@@ -71,6 +73,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpPut("updateAdultPatient")]
         public async Task<IActionResult> UpdateAdultPatient([FromBody] UpdateAdultPatientRequest request)
         {
@@ -88,6 +91,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpPut("updatePassport")]
         public async Task<IActionResult> UpdatePassport([FromBody] UpdatePassportRequest request)
         {

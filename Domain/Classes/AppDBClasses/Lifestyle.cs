@@ -18,8 +18,5 @@ namespace Domain.Classes.AppDBClasses
 
         [ForeignKey("PatientId")]
         public AdultPatient AdultPatient { get; set; }
-
-        [ForeignKey("PatientId")]
-        public LittlePatient LittlePatient { get; set; }
     }
 }

@@ -11,8 +11,6 @@
 
         bool IsAdultPatient { get; }
 
-        bool IsLittlePatient { get; }
-
         bool IsAdmin { get; }
 
         /// <summary>

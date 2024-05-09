@@ -14,7 +14,6 @@ namespace Domain.Classes.AppDBClasses
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public Passport Passport { get; set; }
-        public LittlePatientAdultPatientMap LittlePatientAdultPatientMap { get; set; }
         public ICollection<Address> Addresses { get; set; }
         public string Gender { get; set; }
         public ICollection<AnthropometryOfPatient> AnthropometryOfPatients { get; set; }

@@ -28,6 +28,7 @@ namespace App.BloodAnalysises.Command.CreateBloodAnalysis
                 VLDL = request.VLDL,
                 AtherogenicityCoefficient = request.AtherogenicityCoefficient,
                 BMI = request.BMI,
+                WHI = request.WHI,
                 EmployeeId = request.EmployeeId,
                 DateOfChange = DateTime.UtcNow
             };

@@ -12,6 +12,7 @@ namespace App.BloodAnalysises.Command.CreateBloodAnalysis
         public double VLDL { get; set; }
         public double AtherogenicityCoefficient { get; set; }
         public double BMI { get; set; }
+        public double WHI { get; set; }
         public int EmployeeId { set; get; }
     }
 }
