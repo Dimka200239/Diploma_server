@@ -11,7 +11,6 @@ namespace App.AdultPatients.Query.GetAdultPatientByPassport
     {
         public string Series { get; set; }
         public string Number { get; set; }
-        public string Code { get; set; }
         public DateTime DateOfIssue { get; set; }
     }
 }

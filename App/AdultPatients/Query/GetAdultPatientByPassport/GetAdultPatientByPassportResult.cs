@@ -5,6 +5,12 @@ namespace App.AdultPatients.Query.GetAdultPatientByPassport
 {
     public class GetAdultPatientByPassportResult : BaseResult
     {
-        public AdultPatient? AdultPatient { get; set; }
+        public List<GetPatientWithAddressItemList>? AdultPatients { get; set; }
+    }
+
+    public class GetPatientWithAddressItemList
+    {
+        public AdultPatient AdultPatient { get; set; }
+        public Address Address { get; set; }
     }
 }

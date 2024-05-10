@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Domain.Classes.AppDBClasses
 {
@@ -8,6 +9,7 @@ namespace Domain.Classes.AppDBClasses
     {
         [Key]
         public int AdultPatientId { get; set; }
+        [JsonIgnore]
         public AdultPatient AdultPatient { get; set; }
         public string Series { get; set; }
         public string Number { get; set; }

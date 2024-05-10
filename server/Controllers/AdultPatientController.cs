@@ -28,7 +28,6 @@ namespace server.Controllers
             {
                 Series = request.Series,
                 Number = request.Number,
-                Code = request.Code,
                 DateOfIssue = request.DateOfIssue
             };
 
@@ -44,8 +43,6 @@ namespace server.Controllers
             var query = new GetAdultPatientByNameQuery
             {
                 Name = request.Name,
-                DateOfBirth = request.DateOfBirth,
-                Gender = request.Gender
             };
 
             var result = await _mediator.Send(query);
@@ -114,7 +111,6 @@ namespace server.Controllers
     {
         public string Series {  get; set; }
         public string Number {  get; set; }
-        public string Code {  get; set; }
         public DateTime DateOfIssue { get; set; }
     }
 
@@ -122,8 +118,6 @@ namespace server.Controllers
     public class GetAdultPatientByNameRequest
     {
         public string Name { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public string Gender { get; set; }
     }
 
     public class CreateAdultPatientRequest

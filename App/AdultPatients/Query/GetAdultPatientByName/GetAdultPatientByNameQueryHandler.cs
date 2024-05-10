@@ -17,13 +17,7 @@ namespace App.AdultPatients.Query.GetAdultPatientByName
             GetAdultPatientByNameQuery request,
             CancellationToken cancellationToken)
         {
-            var fullName = "";
-            foreach (var el in request.Name.Split(" "))
-            {
-                fullName += el + " ";
-            }
-
-            var adultPatients = await _unitOfWork.AdultPatients.FindByName(fullName, request.DateOfBirth, request.Gender);
+            var adultPatients = await _unitOfWork.AdultPatients.FindByName(request.Name.Split(" "));
 
             if (adultPatients is null)
             {
@@ -34,11 +28,27 @@ namespace App.AdultPatients.Query.GetAdultPatientByName
                 };
             }
 
-            var result = new GetAdultPatientByNameResult
+            if (adultPatients.Count == 0)
             {
-                Success = true,
-                AdultPatients = adultPatients
-            };
+                return new GetAdultPatientByNameResult
+                {
+                    Success = false,
+                    Errors = new List<string>() { "Не удалось найти данные" }
+                };
+            }
+
+            var result = new GetAdultPatientByNameResult();
+            result.AdultPatients = new List<GetPatientWithAddressItemList>();
+            result.Success = true;
+
+            foreach (var item in adultPatients)
+            {
+                var getPatientWithAddressItemList = new GetPatientWithAddressItemList();
+                getPatientWithAddressItemList.AdultPatient = item;
+                getPatientWithAddressItemList.Address = item.Addresses.OrderBy(a => a.DateOfChange).FirstOrDefault();
+
+                result.AdultPatients.Add(getPatientWithAddressItemList);
+            }
 
             return result;
         }

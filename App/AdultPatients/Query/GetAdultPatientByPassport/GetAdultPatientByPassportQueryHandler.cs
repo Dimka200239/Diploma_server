@@ -1,11 +1,6 @@
 ﻿using App.Common.Interfaces.Persistence;
 using Domain.Classes.AppDBClasses;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.AdultPatients.Query.GetAdultPatientByPassport
 {
@@ -32,11 +27,15 @@ namespace App.AdultPatients.Query.GetAdultPatientByPassport
                     Errors = new List<string>() { "Не удалось найти данные" }
                 };
 
-            var result = new GetAdultPatientByPassportResult
-            {
-                Success = true,
-                AdultPatient = adultPatient
-            };
+            var result = new GetAdultPatientByPassportResult();
+            result.AdultPatients = new List<GetPatientWithAddressItemList>();
+            result.Success = true;
+
+            var getPatientWithAddressItemList = new GetPatientWithAddressItemList();
+            getPatientWithAddressItemList.AdultPatient = adultPatient;
+            getPatientWithAddressItemList.Address = adultPatient.Addresses.OrderBy(a => a.DateOfChange).FirstOrDefault();
+
+            result.AdultPatients.Add(getPatientWithAddressItemList);
 
             return result;
         }

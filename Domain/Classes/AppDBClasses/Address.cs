@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Domain.Classes.AppDBClasses
 {
@@ -16,6 +17,7 @@ namespace Domain.Classes.AppDBClasses
         public int? Apartment { get; set; }
         public DateTime DateOfChange { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("PatientId")]
         public AdultPatient AdultPatient { get; set; }
 

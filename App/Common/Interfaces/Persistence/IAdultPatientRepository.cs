@@ -6,7 +6,7 @@ namespace App.Common.Interfaces.Persistence
     public interface IAdultPatientRepository
     {
         Task<AdultPatient?> FindByPassport(GetAdultPatientByPassportQuery option);
-        Task<List<AdultPatient>> FindByName(string fullName, DateTime date, string gender);
+        Task<List<AdultPatient>> FindByName(string[] fullName);
         void Add(AdultPatient adultPatient);
         Task<AdultPatient?> FindById(int adultPatientId);
         void Update(AdultPatient adultPatient);

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Domain.Classes.AppDBClasses
@@ -21,9 +22,11 @@ namespace Domain.Classes.AppDBClasses
         public DateTime DateOfChange { get; set; }
         public int EmployeeId { set; get; }
 
+        [JsonIgnore]
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("PatientId")]
         public AdultPatient AdultPatient { get; set; }
     }
