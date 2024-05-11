@@ -78,7 +78,6 @@ namespace server.Controllers
             {
                 AdultPatientId = request.AdultPatientId,
                 Name = request.Name,
-                MiddleName = request.MiddleName,
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber
             };
@@ -134,7 +133,6 @@ namespace server.Controllers
     {
         public int AdultPatientId {  get; set; }
         public string Name { get; set; }
-        public string? MiddleName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
     }

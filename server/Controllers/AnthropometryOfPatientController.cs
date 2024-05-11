@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace server.Controllers
 {
-    [Authorize(Roles = "employee")]
     [Route("api/anthropometryOfPatient")]
     public class AnthropometryOfPatientController : ApiController
     {
@@ -17,6 +16,7 @@ namespace server.Controllers
             _mediator = mediator;
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpPost("createAnthropometryOfPatient")]
         public async Task<IActionResult> CreateAnthropometryOfPatient([FromBody] CreateAnthropometryOfPatientRequest request)
         {
@@ -26,7 +26,9 @@ namespace server.Controllers
                 Role = request.Role,
                 Height = request.Height,
                 Weight = request.Weight,
-                Age = request.Age
+                Age = request.Age,
+                Waist = request.Waist,
+                Hip = request.Hip
             };
 
             var result = await _mediator.Send(query);
@@ -34,6 +36,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpGet("getAllAnthropometryOfPatients/{patientId}/{role}")]
         public async Task<IActionResult> GetAllAnthropometryOfPatients(int patientId, string role)
         {
@@ -53,8 +56,10 @@ namespace server.Controllers
     {
         public int PatientId { get; set; }
         public string Role { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
+        public double Height { get; set; }
+        public double Weight { get; set; }
         public int Age { get; set; }
+        public double Hip { get; set; }
+        public double Waist { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace App.AdultPatients.Query.GetAdultPatientByPassport
 
             var getPatientWithAddressItemList = new GetPatientWithAddressItemList();
             getPatientWithAddressItemList.AdultPatient = adultPatient;
-            getPatientWithAddressItemList.Address = adultPatient.Addresses.OrderBy(a => a.DateOfChange).FirstOrDefault();
+            getPatientWithAddressItemList.Address = adultPatient.Addresses.OrderByDescending(a => a.DateOfChange).FirstOrDefault();
 
             result.AdultPatients.Add(getPatientWithAddressItemList);
 

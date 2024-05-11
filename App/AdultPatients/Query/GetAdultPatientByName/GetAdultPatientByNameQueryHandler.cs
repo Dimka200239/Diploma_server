@@ -45,7 +45,7 @@ namespace App.AdultPatients.Query.GetAdultPatientByName
             {
                 var getPatientWithAddressItemList = new GetPatientWithAddressItemList();
                 getPatientWithAddressItemList.AdultPatient = item;
-                getPatientWithAddressItemList.Address = item.Addresses.OrderBy(a => a.DateOfChange).FirstOrDefault();
+                getPatientWithAddressItemList.Address = item.Addresses.OrderByDescending(a => a.DateOfChange).FirstOrDefault();
 
                 result.AdultPatients.Add(getPatientWithAddressItemList);
             }

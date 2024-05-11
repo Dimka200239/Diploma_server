@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace server.Controllers
 {
-    [Authorize(Roles = "employee")]
     [Route("api/lifestyle")]
     public class LifestyleController : ApiController
     {
@@ -17,7 +16,7 @@ namespace server.Controllers
             _mediator = mediator;
         }
 
-
+        [Authorize(Roles = "employee, admin")]
         [HttpPost("createLifestyle")]
         public async Task<IActionResult> CreateLifestyle([FromBody] LifestyleRequest request)
         {
@@ -35,6 +34,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpGet("getAllLifestyles/{patientId}/{role}")]
         public async Task<IActionResult> GetAllLifestyles(int patientId, string role)
         {

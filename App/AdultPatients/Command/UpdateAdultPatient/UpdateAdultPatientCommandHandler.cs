@@ -27,7 +27,6 @@ namespace App.AdultPatients.Command.UpdateAdultPatient
                 };
 
             adultPatient.Name = request.Name;
-            adultPatient.MiddleName = request.MiddleName;
             adultPatient.LastName = request.LastName;
             adultPatient.PhoneNumber = request.PhoneNumber;
 
