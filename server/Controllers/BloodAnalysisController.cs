@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace server.Controllers
 {
-    [Authorize(Roles = "employee")]
     [Route("api/bloodAnalysis")]
     public class BloodAnalysisController : ApiController
     {
@@ -17,6 +16,7 @@ namespace server.Controllers
             _mediator = mediator;
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpPost("createBloodAnalysis")]
         public async Task<IActionResult> CreateBloodAnalysis([FromBody] BloodAnalysisRequest request)
         {
@@ -32,7 +32,8 @@ namespace server.Controllers
                 VLDL = request.VLDL,
                 AtherogenicityCoefficient = request.AtherogenicityCoefficient,
                 BMI = request.BMI,
-                EmployeeId = emplyeeId
+                EmployeeId = emplyeeId,
+                WHI = request.WHI
             };
 
             var result = await _mediator.Send(query);
@@ -40,6 +41,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "employee, admin")]
         [HttpGet("getAllBloodAnalysises/{patientId}/{role}")]
         public async Task<IActionResult> GetAllBloodAnalysises(int patientId, string role)
         {
@@ -65,5 +67,6 @@ namespace server.Controllers
         public double VLDL { get; set; }
         public double AtherogenicityCoefficient { get; set; }
         public double BMI { get; set; }
+        public double WHI { get; set; }
     }
 }

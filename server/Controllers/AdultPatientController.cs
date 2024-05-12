@@ -1,6 +1,7 @@
 ﻿using App.AdultPatients.Command.CreateAdultPatient;
 using App.AdultPatients.Command.UpdateAdultPatient;
 using App.AdultPatients.Command.UpdatePassport;
+using App.AdultPatients.Query.GetAdultPatientByIdWithAnthropometryAndLifestyle;
 using App.AdultPatients.Query.GetAdultPatientByName;
 using App.AdultPatients.Query.GetAdultPatientByPassport;
 using Domain.Models.User;
@@ -43,6 +44,20 @@ namespace server.Controllers
             var query = new GetAdultPatientByNameQuery
             {
                 Name = request.Name,
+            };
+
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "employee, admin")]
+        [HttpGet("getAdultPatientByIdWithAnthropometryAndLifestyle/{adultPatientId}")]
+        public async Task<IActionResult> GetAdultPatientByIdWithAnthropometryAndLifestyle(int adultPatientId)
+        {
+            var query = new GetAdultPatientByIdWithAnthropometryAndLifestyleQuery
+            {
+                AdultPatientId = adultPatientId,
             };
 
             var result = await _mediator.Send(query);
