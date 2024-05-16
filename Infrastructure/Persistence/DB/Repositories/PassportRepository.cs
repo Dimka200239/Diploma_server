@@ -21,12 +21,12 @@ namespace Infrastructure.Persistence.DB.Repositories
 
         public void Update(Passport passport)
         {
-            _context.Update(passport);
+            _context.Passports.Update(passport);
         }
 
         public void Add(Passport passport)
         {
-            _context.Add(passport);
+            _context.Passports.Add(passport);
         }
     }
 }

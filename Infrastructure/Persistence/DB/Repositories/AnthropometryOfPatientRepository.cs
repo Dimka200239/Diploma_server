@@ -15,7 +15,7 @@ namespace Infrastructure.Persistence.DB.Repositories
 
         public void Add(AnthropometryOfPatient anthropometryOfPatient)
         {
-            _context.Add(anthropometryOfPatient);
+            _context.AnthropometryOfPatients.Add(anthropometryOfPatient);
         }
 
         public async Task<List<AnthropometryOfPatient>?> FindAll(int patientId, string role)

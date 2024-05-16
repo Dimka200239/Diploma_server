@@ -10,6 +10,9 @@
         IAnthropometryOfPatientRepository AnthropometryOfPatients { get; }
         ILifestyleRepository Lifestyles { get; }
         IBloodAnalysisRepository BloodAnalysises { get; }
+        IDateForForecastingRepository DateForForecastings { get; }
+        IDataForFutureLearningRepository DataForFutureLearnings { get; }
+        IMachineLearningModelRepository MachineLearningModels { get; }
         Task<bool> CompleteAsync();
     }
 }

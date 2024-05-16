@@ -14,6 +14,9 @@ namespace Infrastructure.Persistence.DB.Repositories
         private IAnthropometryOfPatientRepository _anthropometryOfPatientRepository;
         private ILifestyleRepository _lifestyleRepository;
         private IBloodAnalysisRepository _bloodAnalysisRepository;
+        private IDateForForecastingRepository _dateForForecastingRepository;
+        private IDataForFutureLearningRepository _dataForFutureLearningRepository;
+        private IMachineLearningModelRepository _machineLearningModelRepository;
 
         public UnitOfWork(ApplicationContext context)
         {
@@ -28,6 +31,9 @@ namespace Infrastructure.Persistence.DB.Repositories
         public IAnthropometryOfPatientRepository AnthropometryOfPatients => _anthropometryOfPatientRepository ?? (_anthropometryOfPatientRepository = new AnthropometryOfPatientRepository(_context));
         public ILifestyleRepository Lifestyles => _lifestyleRepository ?? (_lifestyleRepository = new LifestyleRepository(_context));
         public IBloodAnalysisRepository BloodAnalysises => _bloodAnalysisRepository ?? (_bloodAnalysisRepository = new BloodAnalysisRepository(_context));
+        public IDateForForecastingRepository DateForForecastings => _dateForForecastingRepository ?? (_dateForForecastingRepository = new DateForForecastingRepository(_context));
+        public IDataForFutureLearningRepository DataForFutureLearnings => _dataForFutureLearningRepository ?? (_dataForFutureLearningRepository = new DataForFutureLearningRepository(_context));
+        public IMachineLearningModelRepository MachineLearningModels => _machineLearningModelRepository ?? (_machineLearningModelRepository = new MachineLearningModelRepository(_context));
 
         public async Task<bool> CompleteAsync()
         {

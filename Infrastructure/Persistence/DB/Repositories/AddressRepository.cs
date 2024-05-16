@@ -15,7 +15,7 @@ namespace Infrastructure.Persistence.DB.Repositories
 
         public void Add(Address address)
         {
-            _context.Add(address);
+            _context.Addresses.Add(address);
         }
 
         public async Task<List<Address>?> FindAll(int patientId, string role)

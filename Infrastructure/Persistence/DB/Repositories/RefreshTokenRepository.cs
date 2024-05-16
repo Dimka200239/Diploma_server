@@ -14,7 +14,7 @@ namespace Infrastructure.Persistence.DB.Repositories
 
         public void Remove(RefreshToken refreshToken)
         {
-            _context.Remove(refreshToken);
+            _context.RefreshTokens.Remove(refreshToken);
         }
     }
 }

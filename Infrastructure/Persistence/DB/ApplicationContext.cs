@@ -21,6 +21,9 @@ namespace Infrastructure.Persistence.DB
         public DbSet<Lifestyle> Lifestyles { get; set; }
         public DbSet<Passport> Passports { get; set; }
         public DbSet<RefreshToken> RefreshTokens { set; get; }
+        public DbSet<DateForForecasting> DateForForecastings { set; get; }
+        public DbSet<DataForFutureLearning> DataForFutureLearnings { set; get; }
+        public DbSet<MachineLearningModel> MachineLearningModels { set; get; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

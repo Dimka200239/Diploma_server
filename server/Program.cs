@@ -11,6 +11,7 @@ using Infrastructure.Persistence.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.CookiePolicy;
 using server.CustomMiddleware;
+using Microsoft.ML;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -76,6 +77,9 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
     services.AddHttpContextAccessor();
+
+    // Добавление ML.NET контекста
+    services.AddSingleton<MLContext>(); // Регистрация MLContext как Singleton
 }
 
 var app = builder.Build();

@@ -19,17 +19,17 @@ namespace Infrastructure.Persistence.DB.Repositories
 
         public void Add(AdultPatient adultPatient)
         {
-            _context.Add(adultPatient);
+            _context.AdultPatients.Add(adultPatient);
         }
 
         public void Update(AdultPatient adultPatient)
         {
-            _context.Update(adultPatient);
+            _context.AdultPatients.Update(adultPatient);
         }
 
         public void Remove(AdultPatient adultPatient)
         {
-            _context.Remove(adultPatient);
+            _context.AdultPatients.Remove(adultPatient);
         }
 
         public async Task<AdultPatient?> FindById(int adultPatientId)
