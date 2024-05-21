@@ -13,6 +13,7 @@
         IDateForForecastingRepository DateForForecastings { get; }
         IDataForFutureLearningRepository DataForFutureLearnings { get; }
         IMachineLearningModelRepository MachineLearningModels { get; }
+        ICorrelationValueRepository CorrelationValues { get; }
         Task<bool> CompleteAsync();
     }
 }

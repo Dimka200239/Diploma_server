@@ -24,6 +24,7 @@ namespace Infrastructure.Persistence.DB
         public DbSet<DateForForecasting> DateForForecastings { set; get; }
         public DbSet<DataForFutureLearning> DataForFutureLearnings { set; get; }
         public DbSet<MachineLearningModel> MachineLearningModels { set; get; }
+        public DbSet<CorrelationValue> CorrelationValues { set; get; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -115,7 +115,7 @@ namespace App.MachineLearningModels.Command.UpdateMachineLearningModel
                     return new UpdateMachineLearningModelResult
                     {
                         Success = false,
-                        Errors = new List<string>() { "Не удалось созранить переобученную модель в БД" }
+                        Errors = new List<string>() { "Не удалось сохранить переобученную модель в БД" }
                     };
                 }
 

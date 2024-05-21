@@ -17,6 +17,7 @@ namespace Infrastructure.Persistence.DB.Repositories
         private IDateForForecastingRepository _dateForForecastingRepository;
         private IDataForFutureLearningRepository _dataForFutureLearningRepository;
         private IMachineLearningModelRepository _machineLearningModelRepository;
+        private ICorrelationValueRepository _correlationValueRepository;
 
         public UnitOfWork(ApplicationContext context)
         {
@@ -34,6 +35,7 @@ namespace Infrastructure.Persistence.DB.Repositories
         public IDateForForecastingRepository DateForForecastings => _dateForForecastingRepository ?? (_dateForForecastingRepository = new DateForForecastingRepository(_context));
         public IDataForFutureLearningRepository DataForFutureLearnings => _dataForFutureLearningRepository ?? (_dataForFutureLearningRepository = new DataForFutureLearningRepository(_context));
         public IMachineLearningModelRepository MachineLearningModels => _machineLearningModelRepository ?? (_machineLearningModelRepository = new MachineLearningModelRepository(_context));
+        public ICorrelationValueRepository CorrelationValues => _correlationValueRepository ?? (_correlationValueRepository = new CorrelationValueRepository(_context));
 
         public async Task<bool> CompleteAsync()
         {
