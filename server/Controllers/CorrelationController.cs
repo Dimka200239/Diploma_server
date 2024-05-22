@@ -1,4 +1,5 @@
 ﻿using App.Correlations.Command.GetCorrelation;
+using App.Correlations.Query.GetLastCorrelationValue;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace server.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Roles = "admin, employee")]
+        [Authorize(Roles = "admin")]
         [HttpPost("getCorrelation")]
         public async Task<IActionResult> GetCorrelation()
         {
@@ -25,6 +26,20 @@ namespace server.Controllers
             };
 
             var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "admin, employee")]
+        [HttpGet("getLastCorrelationValue")]
+        public async Task<IActionResult> GetLastCorrelationValue()
+        {
+            var query = new GetLastCorrelationValueQuery
+            {
+
+            };
+
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
