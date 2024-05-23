@@ -1,8 +1,10 @@
 ﻿using App.Auth.Commands.RefreshToken;
 using App.Auth.Commands.RegisterEmployee;
 using App.Auth.Commands.RevokeToken;
+using App.Auth.Commands.UpdateEmployee;
 using App.Auth.Queries.GetEmployeeByLogin;
 using App.Auth.Queries.Login;
+using Domain.Classes.AppDBClasses;
 using Domain.Models.User;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -50,7 +52,7 @@ namespace server.Controllers
                 MiddleName = request.MiddleName,
                 LastName = request.LastName,
                 Gender = request.Gender.Equals(Gender.Female) ? Gender.Female : Gender.Male,
-                Role = Role.Employee,
+                Role = request.Role.Equals(Role.Admin) ? Role.Admin : Role.Employee,
                 Token = request.Token
             };
 
@@ -62,7 +64,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         [HttpPost("refreshToken")]
         public async Task<IActionResult> RefreshToken()
         {
@@ -81,7 +83,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         [HttpPost("revokeToken")]
         public async Task<IActionResult> RevokeToken()
         {
@@ -97,7 +99,27 @@ namespace server.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "employee, admin")]
+        [Authorize(Roles = "admin")]
+        [HttpPost("updateEmployee")]
+        public async Task<IActionResult> UpdateEmployee(RegisterEmployeeRequest request)
+        {
+            var query = new UpdateEmployeeCommand
+            {
+                Login = request.Login,
+                Password = request.Password,
+                Name = request.Name,
+                LastName = request.LastName,
+                MiddleName = request.MiddleName,
+                Gender = request.Gender,
+                Role = request.Role
+            };
+
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "admin")]
         [HttpGet("getEmployeeByLogin/{login}")]
         public async Task<IActionResult> GetEmployeeByLogin(string login)
         {
@@ -137,6 +159,8 @@ namespace server.Controllers
         public string LastName { get; set; }
 
         public string Gender { get; set; }
+
+        public string Role { get; set; }
 
         public string? Token { get; set; } //Токен из ссылки для регистрации
     }

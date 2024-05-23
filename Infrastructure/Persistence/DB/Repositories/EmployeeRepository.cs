@@ -23,9 +23,9 @@ namespace Infrastructure.Persistence.DB.Repositories
             return _context.Employees.Any(u => u.Login == login);
         }
 
-        public Task<Employee> FindByLogin(string login)
+        public async Task<Employee> FindByLogin(string login)
         {
-            return _context.Employees.FirstOrDefaultAsync(u => u.Login == login);
+            return await _context.Employees.FirstOrDefaultAsync(u => u.Login == login);
         }
 
         public async Task<Employee> GetUserCheckToken(string token)
