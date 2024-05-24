@@ -110,9 +110,13 @@ var app = builder.Build();
             }
             catch (Exception ex)
             {
+
             }
         }
     }
+
+    app.UseHttpsRedirection();
+    app.UseRouting();
 
     app.UseCors("AllowAllHeaders");
 

@@ -23,7 +23,7 @@ namespace Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddDbContext<ApplicationContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
             });
             #endregion
 

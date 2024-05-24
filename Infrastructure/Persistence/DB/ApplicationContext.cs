@@ -85,4 +85,18 @@ namespace Infrastructure.Persistence.DB
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
+
+    /// <summary>
+    /// инфа для подключения основной бд
+    /// </summary>
+    public static class ConfigSQLYandex
+    {
+        public static string Host = "rc1d-nt0svrq9gf2vbovu.mdb.yandexcloud.net";
+        public static string Port = "6432";
+        public static string Db = "db_diploma";
+        public static string Username = "user1";
+        public static string Password = "dimka_2002392017";
+        public static string Security = "Ssl Mode=Require;Trust Server Certificate=true;";
+
+    }
 }
