@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.CookiePolicy;
 using server.CustomMiddleware;
 using Microsoft.ML;
 
+// Устанавливаем переключатель для Npgsql
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 {
     var services = builder.Services;
