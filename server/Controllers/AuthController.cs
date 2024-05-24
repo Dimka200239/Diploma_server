@@ -119,7 +119,7 @@ namespace server.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, employee")]
         [HttpGet("getEmployeeByLogin/{login}")]
         public async Task<IActionResult> GetEmployeeByLogin(string login)
         {
