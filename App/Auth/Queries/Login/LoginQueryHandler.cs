@@ -23,9 +23,16 @@ namespace App.Auth.Queries.Login
             var employee = await _unitOfWork.Employees.FindByLogin(request.Login);
 
             if (employee is null)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Не нашел пользователя");
+                Console.WriteLine();
+                Console.WriteLine();
                 return new AuthResult { Success = false, Errors = new List<string> { "Неверные учетные данные" } };
+            }
 
-            var hashRequest = new HashSecurity(request.Password, employee.RegistrationDate);
+            var hashRequest = new HashSecurity(request.Password, employee.RegistrationDate.AddHours(3));
             var hashRequest2 = new HashSecurity(request.Password, employee.RegistrationDate.ToUniversalTime());
 
             if (employee.Password == hashRequest.Text || employee.Password == hashRequest2.Text)
@@ -34,6 +41,16 @@ namespace App.Auth.Queries.Login
 
                 employee.RefreshTokens.Add(refreshToken);
                 await _unitOfWork.CompleteAsync();
+
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine(employee.Password);
+                Console.WriteLine(hashRequest.Text);
+                Console.WriteLine(hashRequest2.Text);
+                Console.WriteLine(employee.RegistrationDate);
+                Console.WriteLine(employee.RegistrationDate.ToUniversalTime());
+                Console.WriteLine();
+                Console.WriteLine();
 
                 return new AuthResult
                 {
@@ -47,6 +64,16 @@ namespace App.Auth.Queries.Login
             }
             else
             {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine(employee.Password);
+                Console.WriteLine(hashRequest.Text);
+                Console.WriteLine(hashRequest.Text);
+                Console.WriteLine(hashRequest2.Text);
+                Console.WriteLine(employee.RegistrationDate);
+                Console.WriteLine(employee.RegistrationDate.ToUniversalTime());
+                Console.WriteLine();
+                Console.WriteLine();
                 return new AuthResult { Success = false, Errors = new List<string> { "Неверные учетные данные" } };
             }
         }
