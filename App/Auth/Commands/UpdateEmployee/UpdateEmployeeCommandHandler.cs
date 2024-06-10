@@ -41,7 +41,7 @@ namespace App.Auth.Commands.UpdateEmployee
                     Errors = new List<string> { "Не удалось найти данные" }
                 };
 
-            var timeRegistration = DateTime.UtcNow;
+            var timeRegistration = DateTime.Now.ToUniversalTime();
             var hash = new HashSecurity(request.Password, timeRegistration);
             var refreshToken = _tokenGenerator.GenerateRefreshToken();
 
@@ -58,16 +58,6 @@ namespace App.Auth.Commands.UpdateEmployee
             _unitOfWork.Employees.Update(employee);
 
             var result = await _unitOfWork.CompleteAsync();
-
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine(employee.Password);
-            Console.WriteLine(hash.Text);
-            Console.WriteLine(timeRegistration);
-            Console.WriteLine(timeRegistration.ToUniversalTime());
-            Console.WriteLine(employee.RegistrationDate);
-            Console.WriteLine();
-            Console.WriteLine();
 
             if (result)
                 return new UpdateEmployeeResult
